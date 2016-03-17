@@ -1,0 +1,70 @@
+---
+#
+# Cookbook Name:: hana-studio
+# Kitchen:: EC2 Windows
+#
+# Copyright 2016, SAP
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+################################################################################
+# Many of the parameters in this file were used for initial testing and        #
+# should be made current for future testing. (AMIs change, the S3 source files #
+# are no longer present, etc.) Please update as necessary.                     #
+################################################################################
+
+driver:
+  name: ec2
+  aws_ssh_key_id: test-kitchen
+  region: us-west-1
+  security_group_ids: ["sg-88c4dbed"]
+  availability_zone: c
+  instance_type: t2.micro
+
+transport:
+  ssh_key: c:\chef\secrets\test-kitchen.pem
+  connection_timeout: 10
+  connection_retries: 5
+
+provisioner:
+  name: chef_zero
+
+platforms:
+  - name: windows-2012-r2
+    driver:
+      image_id: ami-95fd8bf5
+  - name: windows-2012
+    driver:
+      image_id: ami-60f88e00
+  - name: windows-2008-r2
+    driver:
+      image_id: ami-d7fa8cb7
+  - name: windows-2008
+    driver:
+      image_id: ami-0bfd8b6b
+
+suites:
+  - name: hs94
+    run_list:
+      - recipe[hana-studio]
+    attributes:
+      sap:
+        hanastudio: "https://s3-us-west-1.amazonaws.com/sap-opensource-demo/rev_1_00_094.zip"
+  - name: sar
+    run_list:
+      - recipe[hana-studio]
+    attributes:
+      sap:
+        sapcar: "https://s3-us-west-1.amazonaws.com/sap-opensource-demo/SAPCAR.EXE"
+        hanastudio: "https://s3-us-west-1.amazonaws.com/sap-opensource-demo/IMC_STUDIO2_112_0-80000323.SAR"
