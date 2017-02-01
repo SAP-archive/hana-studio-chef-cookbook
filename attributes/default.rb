@@ -29,7 +29,7 @@ default['sap']['hanastudio'] = nil
 ############
 
 # Location to install the HANA studio
-default['hana-studio']['install_dir'] = 'C:\Program Files\SAP\Hdbstudio'
+default['hana-studio']['install_dir'] = 'C:/Program Files/SAP/Hdbstudio'
 
 # Features to install with the studio
 default['hana-studio']['features'] = 'all'

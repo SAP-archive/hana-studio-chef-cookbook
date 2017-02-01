@@ -3,6 +3,12 @@ hana-studio CHANGELOG
 
 This file is used to list changes made in each version of the hana-studio cookbook.
 
+1.0.1
+-----
+- Dan-Joe - Fix for issue with slashes in the path when running on chef-server.
+- Dan-Joe - Added issues and source urls in metadata.
+- Dan-Joe - Improvements for remote file resource OS agnosticity.
+
 1.0.0
 -----
 - Dan-Joe - Initial public release of SAP's hana-studio cookbook.

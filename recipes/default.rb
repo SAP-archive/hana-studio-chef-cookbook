@@ -22,9 +22,9 @@
 ###########
 
 # Setup vars for readability
-extract_to_dir = "#{Chef::Config[:file_cache_path]}\\sap_temp"
-installer_file = extract_to_dir + '\SAP_HANA_STUDIO\hdbinst.exe'
-studio = node['hana-studio']['install_dir'] + '\install\hdbuninst.exe'
+extract_to_dir = "#{Chef::Config[:file_cache_path]}//sap_temp"
+installer_file = extract_to_dir + '/SAP_HANA_STUDIO/hdbinst.exe'
+studio = node['hana-studio']['install_dir'] + '/install/hdbuninst.exe'
 
 # Get current state
 studio_installed = ::File.exist?(studio)

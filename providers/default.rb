@@ -21,14 +21,16 @@ use_inline_resources
 
 action :install do
   # Setup install options
-  studio = ::File.exist?("#{new_resource.destination}\\install\\hdbuninst.exe")
+  studio = ::File.exist?("#{new_resource.destination}/install/hdbuninst.exe")
   installer = new_resource.installer
+  install_dir = ::File.dirname(installer)
   options = ' --batch '
   options += "--features=#{new_resource.features} " if new_resource.features
   options += "-p=\"#{new_resource.destination}\""
 
   # Execute installation with options
   execute "Installing Hana Studio to: {#{new_resource.destination}}" do
+    cwd install_dir
     command installer + options
     action :run
     not_if { studio }
@@ -37,7 +39,7 @@ end
 
 action :uninstall do
   # Setup removal options
-  uninstaller = "#{new_resource.destination}\\install\\hdbuninst.exe"
+  uninstaller = "#{new_resource.destination}/install/hdbuninst.exe"
   options = " --batch --path=\"#{new_resource.destination}\""
 
   # Execute uninstallation
