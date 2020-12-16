@@ -17,10 +17,6 @@
 # limitations under the License.
 #
 
-require 'serverspec'
-
-set :backend, :cmd
-
 describe file('C:\Program Files\SAP\Hdbstudio\install\hdbuninst.exe') do
   it { should be_file }
 end

@@ -1,70 +1,59 @@
 ---
-#
-# Cookbook Name:: hana-studio
-# Kitchen:: EC2 Windows
-#
-# Copyright 2016, SAP
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
-
-################################################################################
-# Many of the parameters in this file were used for initial testing and        #
-# should be made current for future testing. (AMIs change, the S3 source files #
-# are no longer present, etc.) Please update as necessary.                     #
-################################################################################
-
 driver:
-  name: ec2
-  aws_ssh_key_id: test-kitchen
-  region: us-west-1
-  security_group_ids: ["sg-88c4dbed"]
-  availability_zone: c
-  instance_type: t2.micro
-
+  name: gce
+  project:      <%= ENV['GCP_PROJECT'] %>
+  zone:         <%= ENV['GCP_ZONE'] %>
+  email:        <%= ENV['GCP_EMAIL'] %>
+  machine_type: n1-standard-1
+  service_account_scopes:
+  - servicecontrol
+  - service.management.readonly
+  - logging.write
+  - monitoring.write
+  - trace.append
+  - devstorage.read_only
+    
 transport:
-  ssh_key: c:\chef\secrets\test-kitchen.pem
-  connection_timeout: 10
-  connection_retries: 5
+  username: <%= ENV['GCP_USER'] %>
+  ssh_key:  <%= ENV['GCP_SSH_KEY'].tr('\\','/') %>
 
 provisioner:
   name: chef_zero
+  product_name: chef
+  chef_license: accept
+
+verifier:
+  name: inspec
 
 platforms:
-  - name: windows-2012-r2
-    driver:
-      image_id: ami-95fd8bf5
-  - name: windows-2012
-    driver:
-      image_id: ami-60f88e00
-  - name: windows-2008-r2
-    driver:
-      image_id: ami-d7fa8cb7
-  - name: windows-2008
-    driver:
-      image_id: ami-0bfd8b6b
+<% %w(15 16).each do |chef_ver| %>
+  <% %w(2012-r2 2012-r2-core 2016 2016-core 2019 2019-core 2019-for-containers 2019-core-for-containers).each do |win_ver| %>
+  - name: <%= "win-#{win_ver}-#{chef_ver}" %>
+    driver_config:
+      image_project: windows-cloud
+      image_family: windows-<%= win_ver %>
+      disk_size: 80
+    provisioner:
+      product_version: <%= chef_ver %><% end %>
+<% end %>
 
 suites:
   - name: hs94
     run_list:
       - recipe[hana-studio]
+    verifier:
+      inspec_tests:
+        - test/integration
     attributes:
       sap:
-        hanastudio: "https://s3-us-west-1.amazonaws.com/sap-opensource-demo/rev_1_00_094.zip"
+        hanastudio: "https://storage.googleapis.com/cookbook_dev_share/opensource_test_djl/win/rev_1_00_094.zip"
   - name: sar
     run_list:
       - recipe[hana-studio]
+    verifier:
+      inspec_tests:
+        - test/integration
     attributes:
       sap:
-        sapcar: "https://s3-us-west-1.amazonaws.com/sap-opensource-demo/SAPCAR.EXE"
-        hanastudio: "https://s3-us-west-1.amazonaws.com/sap-opensource-demo/IMC_STUDIO2_112_0-80000323.SAR"
+        sapcar: "https://storage.googleapis.com/cookbook_dev_share/opensource_test_djl/SAPCAR_721-20010453.EXE"
+        hanastudio: "https://storage.googleapis.com/cookbook_dev_share/opensource_test_djl/win/IMC_STUDIO2_112_7-80000323.SAR"
