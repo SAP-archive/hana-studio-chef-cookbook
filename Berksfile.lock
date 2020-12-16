@@ -1,0 +1,9 @@
+DEPENDENCIES
+  hana-studio
+    path: .
+    metadata: true
+
+GRAPH
+  hana-studio (2.0.0)
+    windows (>= 0.0.0)
+  windows (7.0.2)
