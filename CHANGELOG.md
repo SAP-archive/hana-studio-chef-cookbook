@@ -3,6 +3,10 @@ hana-studio CHANGELOG
 
 This file is used to list changes made in each version of the hana-studio cookbook.
 
+2.0.0
+-----
+- Dan-Joe - Updated with support for current chef versions.
+
 1.0.1
 -----
 - Dan-Joe - Fix for issue with slashes in the path when running on chef-server.
