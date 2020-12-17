@@ -93,15 +93,6 @@ hana_studio_remote_package 'c:\Path\to\extract\the\package' do
 end
 ```
 
-## Contributing
-Contributions are welcomed!
-
-1. Fork the repo
-2. Create a feature branch (like `add_component_x`)
-3. Write your change
-4. Test your change
-5. Submit a Pull Request using Github
-
 ## License and Authors
 ### Authors
 - Dan-Joe Lopez (Dan-Joe.Lopez@sap.com)
