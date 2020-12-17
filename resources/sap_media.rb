@@ -83,14 +83,5 @@ action :extract do
       command "#{sapcar_ex} -xf #{local_sar} -R #{sar_extract_dir}"
       notifies :delete, "remote_file[#{local_sar}]", :immediately
     end
-
-    #####################
-    ## Cleanup the SAR ##
-    #####################
-
-    # file local_sar do
-    #   action :delete
-    #   backup false
-    # end
   end
 end

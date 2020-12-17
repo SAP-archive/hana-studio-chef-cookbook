@@ -25,7 +25,6 @@ attribute :extractor,   String
 attribute :features,    String
 
 load_current_value do |desired|
-  # puts ""
   destination '' unless ::Dir.exist?(desired.destination) && ::File.exist?("#{desired.destination}/install/hdbuninst.exe")
 end
 
