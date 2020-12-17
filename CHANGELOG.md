@@ -3,8 +3,9 @@ hana-studio CHANGELOG
 
 This file is used to list changes made in each version of the hana-studio cookbook.
 
-2.0.0
+2.0.2
 -----
+- Dan-Joe - Small metadata fixes for compatible chef versions 15+
 - Dan-Joe - Updated with support for current chef versions.
 
 1.0.1
