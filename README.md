@@ -1,5 +1,7 @@
 # hana-studio Cookbook
 
+[![REUSE status](https://api.reuse.software/badge/github.com/SAP/hana-studio-chef-cookbook)](https://api.reuse.software/info/github.com/SAP/hana-studio-chef-cookbook)
+
 This cookbook installs SAP HANA Studio onto a Windows instance.  This is a BYOP
 cookbook (**B**ring **Y**our **O**wn **P**ackage).  You need to provide the
 download location for SAPCAR to extract your SAR package.  You can also use a
@@ -112,3 +114,7 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
+Detailed information including third-party components and their
+licensing/copyright information is available
+[via the REUSE tool](https://api.reuse.software/info/github.com/SAP/hana-studio-chef-cookbook).
