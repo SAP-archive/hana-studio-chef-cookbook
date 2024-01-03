@@ -1,6 +1,9 @@
-# hana-studio Cookbook
+![](https://img.shields.io/badge/STATUS-NOT%20CURRENTLY%20MAINTAINED-red.svg?longCache=true&style=flat)
 
-[![REUSE status](https://api.reuse.software/badge/github.com/SAP/hana-studio-chef-cookbook)](https://api.reuse.software/info/github.com/SAP/hana-studio-chef-cookbook)
+# Important Notice
+This public repository is read-only and no longer maintained.
+
+# hana-studio Cookbook
 
 This cookbook installs SAP HANA Studio onto a Windows instance.  This is a BYOP
 cookbook (**B**ring **Y**our **O**wn **P**ackage).  You need to provide the
